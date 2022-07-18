@@ -1,0 +1,900 @@
+{
+  "doc_type": "pipeline",
+  "version": "3.0",
+  "json_schema": "http://api.dataplatform.ibm.com/schemas/common-pipeline/pipeline-flow/pipeline-flow-v3-schema.json",
+  "id": "elyra-auto-generated-pipeline",
+  "primary_pipeline": "primary",
+  "pipelines": [
+    {
+      "id": "primary",
+      "nodes": [
+        {
+          "id": "ca6abf14-9d2d-44b5-9a09-643fd5009988",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "../dax_noaa_weather_data/load_data.ipynb",
+              "outputs": [
+                "data/noaa-weather-data-jfk-airport/jfk_weather.csv"
+              ],
+              "env_vars": [
+                "DATASET_URL=https://dax-cdn.cdn.appdomain.cloud/dax-noaa-weather-data-jfk-airport/1.1.4/noaa-weather-data-jfk-airport.tar.gz",
+                "ELYRA_RUNTIME_ENV="
+              ],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "load_data.ipynb",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 50,
+              "y_pos": 132.5,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "7a07bd34-fe21-4278-8ef2-02eae48d4f62",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "Part 1 - Data Cleaning.ipynb",
+              "outputs": [
+                "data/noaa-weather-data-jfk-airport/jfk_weather_cleaned.csv"
+              ],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 1 - Data Cleaning.ipynb",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 612,
+              "y_pos": 342,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "29937dd0-945a-4842-a5da-8616f4851d4a",
+                  "node_id_ref": "ca6abf14-9d2d-44b5-9a09-643fd5009988",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "26be088e-8a20-474b-84c2-47dc4be32b43",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "Part 3 - Time Series Forecasting.ipynb",
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 3 - Time Series Forecasting.ipynb",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 50,
+              "y_pos": 560,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "0b602b31-017d-4ade-9a77-cc3fd8a1a1de",
+                  "node_id_ref": "5bdd2ba5-c29c-4abb-b281-ddc7604e842b",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d98fac77-760e-4b39-be2c-80550fa06d29",
+          "type": "super_node",
+          "subflow_ref": {
+            "pipeline_id_ref": "84cfebea-469b-4943-8948-f80aa98575c9"
+          },
+          "app_data": {
+            "ui_data": {
+              "label": "Supernode",
+              "image": "useDefaultIcon",
+              "x_pos": 705,
+              "y_pos": 45,
+              "description": "This supernode was created by common-canvas.",
+              "is_expanded": true,
+              "expanded_width": 300,
+              "expanded_height": 200
+            }
+          },
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "5bdd2ba5-c29c-4abb-b281-ddc7604e842b",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "label": "",
+            "component_parameters": {
+              "filename": "Part 2 - Data Analysis.ipynb",
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "ui_data": {
+              "label": "Part 2 - Data Analysis.ipynb",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 50,
+              "y_pos": 445,
+              "description": "Run notebook file",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "36bc1004-d534-4899-a77a-dc2d40e76d1f",
+                  "node_id_ref": "7a07bd34-fe21-4278-8ef2-02eae48d4f62",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": [
+            {
+              "id": "762eccc0-83c1-44e0-8047-e036e7d55985",
+              "x_pos": 30,
+              "y_pos": 30,
+              "width": 175,
+              "height": 42,
+              "content": "download the data",
+              "associated_id_refs": [
+                {
+                  "node_ref": "ca6abf14-9d2d-44b5-9a09-643fd5009988"
+                }
+              ]
+            },
+            {
+              "id": "f9d6b039-0b68-4540-b638-167451d82ae9",
+              "x_pos": 267,
+              "y_pos": 30,
+              "width": 175,
+              "height": 42,
+              "content": "Clean the data",
+              "associated_id_refs": [
+                {
+                  "node_ref": "7a07bd34-fe21-4278-8ef2-02eae48d4f62"
+                }
+              ]
+            }
+          ]
+        },
+        "version": 7,
+        "properties": {
+          "pipeline_defaults": {},
+          "name": "hello-generic-world",
+          "runtime": "Generic",
+          "description": "a generic pipeline tutorial"
+        }
+      },
+      "runtime_ref": ""
+    },
+    {
+      "id": "84cfebea-469b-4943-8948-f80aa98575c9",
+      "nodes": [
+        {
+          "id": "8719fbe9-153e-43bd-bd99-15399f9a35af",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "Part 2 - Data Analysis.ipynb",
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": [],
+              "runtime_image": "amancevice/pandas:1.4.1"
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Part 2 - Data Analysis.ipynb",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 770,
+              "y_pos": 165,
+              "description": "Run notebook file"
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "f9b6c2c3-7fcb-4c76-8da6-bcd22e36df90",
+                  "node_id_ref": "b1f4027e-34e7-4599-8a4e-cf7e8148ebf1",
+                  "port_id_ref": "outPort"
+                },
+                {
+                  "id": "a2c438bf-bc59-4d6a-a2b7-751263105c00",
+                  "node_id_ref": "ec3ff170-b671-4727-9e2a-6d1ab2ed4d4b",
+                  "port_id_ref": "outPort"
+                },
+                {
+                  "id": "163ed83c-d962-4c5a-b9f7-b5e08a120227",
+                  "node_id_ref": "b0b7cdd6-e38f-412a-afc3-601b38457830",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "dded8de2-5977-4f66-a2b3-32065339e6b2",
+          "type": "super_node",
+          "subflow_ref": {
+            "pipeline_id_ref": "8749b386-0117-484b-bb03-aee191e9d6d5"
+          },
+          "app_data": {
+            "ui_data": {
+              "label": "Supernode",
+              "image": "useDefaultIcon",
+              "x_pos": 50,
+              "y_pos": 50,
+              "description": "This supernode was created by common-canvas.",
+              "is_expanded": false,
+              "expanded_width": 300,
+              "expanded_height": 200
+            }
+          },
+          "inputs": [],
+          "outputs": []
+        },
+        {
+          "id": "63d2dc36-20c1-4328-a1f5-fd5092dc3bd3",
+          "type": "super_node",
+          "subflow_ref": {
+            "pipeline_id_ref": "537c8f1e-dcb0-4916-9065-6c6adc5e4649"
+          },
+          "app_data": {
+            "ui_data": {
+              "label": "Supernode",
+              "image": "useDefaultIcon",
+              "x_pos": 1010,
+              "y_pos": 82.5,
+              "description": "This supernode was created by common-canvas.",
+              "is_expanded": true,
+              "expanded_width": 300,
+              "expanded_height": 200
+            }
+          },
+          "inputs": [
+            {
+              "id": "913f194c-1b85-43b6-8836-679d0d520cb5_inPort",
+              "subflow_node_ref": "d67467fe-7d9b-4563-a8a7-2f9f3df56067",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Binding port for supernode"
+                }
+              },
+              "links": [
+                {
+                  "id": "8bdb86f0-30cc-494c-9839-ab94c3f37db9",
+                  "node_id_ref": "8719fbe9-153e-43bd-bd99-15399f9a35af",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": []
+        },
+        {
+          "id": "b1f4027e-34e7-4599-8a4e-cf7e8148ebf1",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "",
+              "runtime_image": null,
+              "cpu": null,
+              "gpu": null,
+              "memory": null,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Notebook",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 50,
+              "y_pos": 165,
+              "description": "Run notebook file",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "ec3ff170-b671-4727-9e2a-6d1ab2ed4d4b",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "",
+              "runtime_image": null,
+              "cpu": null,
+              "gpu": null,
+              "memory": null,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Notebook",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 290,
+              "y_pos": 198.75,
+              "description": "Run notebook file",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "b52cfb93-4160-4407-9e5b-f99f30153e25",
+                  "node_id_ref": "b1f4027e-34e7-4599-8a4e-cf7e8148ebf1",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "b0b7cdd6-e38f-412a-afc3-601b38457830",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "",
+              "runtime_image": null,
+              "cpu": null,
+              "gpu": null,
+              "memory": null,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Notebook",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 530,
+              "y_pos": 232.5,
+              "description": "Run notebook file",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "46c0d5f1-6ee1-453a-84c4-4b913d014ca0",
+                  "node_id_ref": "ec3ff170-b671-4727-9e2a-6d1ab2ed4d4b",
+                  "port_id_ref": "outPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        }
+      },
+      "runtime_ref": ""
+    },
+    {
+      "id": "d0d4afdf-66ec-4440-8150-4c5771e0cdce",
+      "nodes": [
+        {
+          "id": "164eb02d-d268-4d7c-b5ed-f17146b7fddd",
+          "type": "execution_node",
+          "op": "execute-notebook-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "",
+              "runtime_image": null,
+              "cpu": null,
+              "gpu": null,
+              "memory": null,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Notebook",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20viewBox%3D%220%200%2022%2022%22%3E%0A%20%20%3Cg%20class%3D%22jp-icon-warn0%20jp-icon-selectable%22%20fill%3D%22%23EF6C00%22%3E%0A%20%20%20%20%3Cpath%20d%3D%22M18.7%203.3v15.4H3.3V3.3h15.4m1.5-1.5H1.8v18.3h18.3l.1-18.3z%22%2F%3E%0A%20%20%20%20%3Cpath%20d%3D%22M16.5%2016.5l-5.4-4.3-5.6%204.3v-11h11z%22%2F%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": 852,
+              "y_pos": 195,
+              "description": "Run notebook file",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              }
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        }
+      },
+      "runtime_ref": ""
+    },
+    {
+      "id": "8749b386-0117-484b-bb03-aee191e9d6d5",
+      "nodes": [
+        {
+          "id": "a62e0a04-24ca-4cc2-b10a-1cdf1c2700d7",
+          "type": "super_node",
+          "subflow_ref": {
+            "pipeline_id_ref": "d0d4afdf-66ec-4440-8150-4c5771e0cdce"
+          },
+          "app_data": {
+            "ui_data": {
+              "label": "Supernode",
+              "image": "useDefaultIcon",
+              "x_pos": 753,
+              "y_pos": 304,
+              "description": "This supernode was created by common-canvas.",
+              "is_expanded": false,
+              "expanded_width": 300,
+              "expanded_height": 200
+            }
+          },
+          "inputs": [],
+          "outputs": []
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        }
+      },
+      "runtime_ref": ""
+    },
+    {
+      "id": "537c8f1e-dcb0-4916-9065-6c6adc5e4649",
+      "nodes": [
+        {
+          "id": "913f194c-1b85-43b6-8836-679d0d520cb5",
+          "type": "execution_node",
+          "op": "execute-python-node",
+          "app_data": {
+            "component_parameters": {
+              "filename": "",
+              "runtime_image": null,
+              "cpu": null,
+              "gpu": null,
+              "memory": null,
+              "outputs": [],
+              "env_vars": [],
+              "kubernetes_secrets": [],
+              "dependencies": [],
+              "include_subdirectories": false,
+              "mounted_volumes": []
+            },
+            "label": "",
+            "ui_data": {
+              "label": "Python Script",
+              "image": "data:image/svg+xml;utf8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%20238%20237%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20overflow%3D%22hidden%22%3E%0A%20%20%20%20%3Cg%20transform%3D%22translate(-706%20314)%22%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20class%3D%22jp-icon-selectable%22%20d%3D%22M792.441-295.763C786.496-295.763%20781.697-290.979%20781.697-285.062%20781.697-279.166%20786.496-274.382%20792.441-274.382%20798.365-274.382%20803.184-279.166%20803.184-285.062%20803.184-290.979%20798.365-295.763%20792.441-295.763ZM823.472-312.998C833.277-313.043%20843.484-312.329%20853.336-310.724%20868.899-308.185%20882-296.728%20882-281.516L882-228.072C882-212.398%20869.282-199.557%20853.336-199.557L796.03-199.557C776.58-199.557%20760.189-183.169%20760.189-164.641L760.189-139%20740.485-139C723.817-139%20714.114-150.877%20710.037-167.494%20704.538-189.82%20704.772-203.124%20710.037-224.505%20714.602-243.159%20729.189-253%20745.857-253L767.365-253%20824.693-253%20824.693-260.134%20767.365-260.134%20767.365-281.516C767.365-297.715%20771.76-306.527%20796.03-310.724%20804.268-312.151%20813.668-312.953%20823.472-312.998Z%22%20fill%3D%22%23366A96%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cpath%20class%3D%22jp-icon-selectable%22%20d%3D%22M857.377-117.071C851.466-117.071%20846.655-112.267%20846.655-106.348%20846.655-100.406%20851.466-95.6026%20857.377-95.6026%20863.31-95.6026%20868.099-100.406%20868.099-106.348%20868.099-112.267%20863.31-117.071%20857.377-117.071ZM889.563-253%20911.007-253C927.662-253%20935.502-240.696%20939.614-224.39%20945.334-201.743%20945.589-184.804%20939.614-167.148%20933.828-150%20927.642-138.539%20911.007-138.539L882.402-138.539%20825.211-138.539%20825.211-131.375%20882.402-131.375%20882.402-109.908C882.402-93.6435%20868.205-85.4055%20853.796-81.2973%20832.12-75.1034%20814.722-76.0513%20796.606-81.2973%20781.476-85.6801%20768-94.6332%20768-109.908L768-163.568C768-179.01%20780.947-192.199%20796.606-192.199L853.796-192.199C872.846-192.199%20889.563-208.568%20889.563-227.971Z%22%20fill%3D%22%23FFC836%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A",
+              "x_pos": -207.10884380340576,
+              "y_pos": 1766.196403503418,
+              "description": "Run Python script",
+              "decorations": [
+                {
+                  "id": "error",
+                  "image": "data:image/svg+xml;utf8,%3Csvg%20focusable%3D%22false%22%20preserveAspectRatio%3D%22xMidYMid%20meet%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22%23da1e28%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20aria-hidden%3D%22true%22%3E%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%228%22%20fill%3D%22%23ffffff%22%3E%3C%2Fcircle%3E%3Cpath%20d%3D%22M8%2C1C4.2%2C1%2C1%2C4.2%2C1%2C8s3.2%2C7%2C7%2C7s7-3.1%2C7-7S11.9%2C1%2C8%2C1z%20M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2%09c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%3E%3C%2Fpath%3E%3Cpath%20d%3D%22M7.5%2C4h1v5h-1C7.5%2C9%2C7.5%2C4%2C7.5%2C4z%20M8%2C12.2c-0.4%2C0-0.8-0.4-0.8-0.8s0.3-0.8%2C0.8-0.8%09c0.4%2C0%2C0.8%2C0.4%2C0.8%2C0.8S8.4%2C12.2%2C8%2C12.2z%22%20data-icon-path%3D%22inner-path%22%20opacity%3D%220%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E",
+                  "outline": false,
+                  "position": "topRight",
+                  "x_pos": -24,
+                  "y_pos": -8
+                }
+              ]
+            }
+          },
+          "inputs": [
+            {
+              "id": "inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Input Port"
+                }
+              },
+              "links": [
+                {
+                  "id": "b84aece4-ad0b-41df-967f-624a7d031127",
+                  "node_id_ref": "d67467fe-7d9b-4563-a8a7-2f9f3df56067",
+                  "port_id_ref": "output_913f194c-1b85-43b6-8836-679d0d520cb5_inPort"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "id": "outPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Output Port"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "id": "d67467fe-7d9b-4563-a8a7-2f9f3df56067",
+          "type": "binding",
+          "app_data": {
+            "ui_data": {
+              "label": "Binding",
+              "x_pos": 982,
+              "y_pos": 113,
+              "description": "Supernode binding node"
+            }
+          },
+          "outputs": [
+            {
+              "id": "output_913f194c-1b85-43b6-8836-679d0d520cb5_inPort",
+              "app_data": {
+                "ui_data": {
+                  "cardinality": {
+                    "min": 0,
+                    "max": -1
+                  },
+                  "label": "Binding port for supernode"
+                }
+              }
+            }
+          ]
+        }
+      ],
+      "app_data": {
+        "ui_data": {
+          "comments": []
+        }
+      },
+      "runtime_ref": ""
+    }
+  ],
+  "schemas": []
+}
